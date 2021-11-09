@@ -1,12 +1,13 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { IRecipe } from "./IRecipe";
 
 function App() {
-  const [recipesFound, setRecipesFound] = useState([]);
+  const [recipesFound, setRecipesFound] = useState<IRecipe[]>([]);
   const [recipeSearch, setRecipeSearch] = useState("");
 
-  const searchForRecipes = async (query: string): Promise<any> => {
+  const searchForRecipes = async (query: string): Promise<IRecipe[]> => {
     const result = await fetch(`http://localhost:3001/?search=${query}`);
     return (await result.json()).results;
   };
