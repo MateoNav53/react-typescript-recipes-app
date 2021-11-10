@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { IRecipe } from "./IRecipe";
+import RecipeComponent from "./RecipeComponent";
 
 function App() {
   const [recipesFound, setRecipesFound] = useState<IRecipe[]>([]);
@@ -36,6 +37,17 @@ function App() {
         <input id="searchText" type="text" />
         <button>Search</button>
       </form>
+      {recipeSearch && <p>Results for {recipeSearch}...</p>}
+
+      <div className="recipe-container">
+        {recipesFound.length &&
+          recipesFound.map((recipe) => (
+            <RecipeComponent
+              key={recipe.href}
+              recipe={recipe}
+            ></RecipeComponent>
+          ))}
+      </div>
     </div>
   );
 }
